@@ -14,13 +14,20 @@ Let's get started! 🚀
 
 `);
 
-const targetNumber = Math.floor(Math.random() * 101);
+// a function that generates a random number between 0 and 100
+const generateRandomNumber = () => {
+  return Math.floor(Math.random() * 100);
+};
+
+let targetNumber = generateRandomNumber();
 console.log(targetNumber);
 
+
 const guessNumberGame = (attempt = 1) => {
+  
   if (attempt > 10) {
     console.log("You've reached the maximum number of attempts. Game over.");
-    return;
+    return playAgain();
   }
   if (attempt > 1) {
     console.log(`You have ${11 - attempt} attempts left.`);
@@ -40,7 +47,21 @@ const guessNumberGame = (attempt = 1) => {
     console.log("Your guess is too low!");
     return guessNumberGame(attempt + 1);
   } else {
-    console.log("You won!");
+    console.log(`Congratulations, you won with ${attempt} attempt(s)!`);
+    console.log(playAgain());
+  }
+};
+
+const playAgain = () => {
+  const newGame = prompt("Do you want to play again? (y/n) : ");
+
+  if (newGame === "y") {
+    console.log("Let's play again!");
+    targetNumber = generateRandomNumber();
+    console.log(targetNumber);
+    return guessNumberGame();
+  } else {
+    console.log("Thanks for playing! Goodbye.");
   }
 };
 
